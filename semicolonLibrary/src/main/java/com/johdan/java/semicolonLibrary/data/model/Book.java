@@ -17,9 +17,10 @@ public class Book {
     private String author;
     private String isbn;
     private LocalDateTime createdAt;
+    private String url;
 
     @PrePersist
-    public void setCreatedAt() {
+    private void setCreatedAt() {
         this.createdAt = LocalDateTime.now();
     }
 }

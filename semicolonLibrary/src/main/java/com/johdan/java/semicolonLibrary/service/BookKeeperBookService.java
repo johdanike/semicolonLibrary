@@ -1,6 +1,7 @@
 package com.johdan.java.semicolonLibrary.service;
 
 import com.johdan.java.semicolonLibrary.data.model.Book;
+import com.johdan.java.semicolonLibrary.data.repository.BookRepository;
 import com.johdan.java.semicolonLibrary.dtos.request.AddBookRequest;
 import com.johdan.java.semicolonLibrary.dtos.response.AddBookResponse;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class BookKeeperBookService implements BookService {
 
     private final ModelMapper modelMapper;
+    private final BookRepository bookRepository;
 
 //    @Autowired
 //    public BookKeeperBookService(ModelMapper modelMapper) {
@@ -21,7 +23,9 @@ public class BookKeeperBookService implements BookService {
 
     @Override
     public AddBookResponse addNewBook(AddBookRequest addBookRequest) {
-        modelMapper.map(addBookRequest, Book.class);
+        Book book = modelMapper.map(addBookRequest, Book.class);
+        book = bookRepository.save(book);
+//        TODO: upload e-book file to cloud
         return null;
     }
 }
